@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkGrave 💀 - Dead Link Hunter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fog-container">
+        <div class="fog fog-1"></div>
+        <div class="fog fog-2"></div>
+        <div class="fog fog-3"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title glitch" data-text="LinkGrave">LinkGrave</h1>
+            <p class="subtitle">Where Dead Links Go to Rest 💀</p>
+            <p class="tagline">I crawl the web... and find what's been buried.</p>
+        </header>
+
+        <div class="input-section">
+            <div class="input-wrapper">
+                <input 
+                    type="url" 
+                    id="urlInput" 
+                    placeholder="Enter a website URL to haunt..." 
+                    class="url-input"
+                    required
+                >
+                <button id="scanBtn" class="scan-btn">
+                    <span class="btn-text">Summon the Crawler</span>
+                    <span class="skull">💀</span>
+                </button>
+            </div>
+            <div class="options">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="deepScan" class="checkbox">
+                    <span>Deep Haunt (scan all pages)</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="externalLinks" class="checkbox" checked>
+                    <span>Check external links</span>
+                </label>
+            </div>
+        </div>
+
+        <div id="statusSection" class="status-section hidden">
+            <div class="scanning-animation">
+                <div class="ghost">👻</div>
+                <p class="status-text" id="statusText">Awakening the spirits...</p>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="crawl-info" id="crawlInfo">Links checked: <span id="linksChecked">0</span></p>
+        </div>
+
+        <div id="resultsSection" class="results-section hidden">
+            <h2 class="results-title">The Graveyard Report</h2>
+            
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="card-icon">✅</div>
+                    <div class="card-content">
+                        <div class="card-number" id="aliveCount">0</div>
+                        <div class="card-label">Living Links</div>
+                    </div>
+                </div>
+                <div class="summary-card dead">
+                    <div class="card-icon">💀</div>
+                    <div class="card-content">
+                        <div class="card-number" id="deadCount">0</div>
+                        <div class="card-label">Dead Links</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon">🕷️</div>
+                    <div class="card-content">
+                        <div class="card-number" id="totalCount">0</div>
+                        <div class="card-label">Total Links</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deadLinksContainer" class="dead-links-container">
+                <!-- Dead links will be populated here -->
+            </div>
+
+            <div id="healthyLinksContainer" class="healthy-links-container hidden">
+                <button class="toggle-healthy-btn" id="toggleHealthyBtn">
+                    Show Living Links <span>👁️</span>
+                </button>
+                <div id="healthyLinksList" class="healthy-links-list hidden">
+                    <!-- Healthy links will be populated here -->
+                </div>
+            </div>
+
+            <button class="export-btn" id="exportBtn">
+                <span>Export Report</span>
+                <span>📋</span>
+            </button>
+        </div>
+
+        <footer class="footer">
+            <p>Built with dark magic and JavaScript ✨</p>
+            <p class="warning">⚠️ Some links may rest in peace due to CORS... we respect their boundaries.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
