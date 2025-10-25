@@ -1,0 +1,233 @@
+.scanner-card,
+.scanning-card {
+  background: rgba(var(--blue-rgb), 0.3);
+  border: 2px solid var(--orange);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 
+    0 0 30px rgba(var(--orange-rgb), 0.3),
+    inset 0 0 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.input-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.url-input {
+  flex: 1;
+  min-width: 250px;
+  padding: 18px 25px;
+  font-size: 1.05rem;
+  font-family: 'Rubik', sans-serif;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--dark-blue);
+  border-radius: 12px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.url-input:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 20px rgba(var(--orange-rgb), 0.5);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.url-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.scan-button {
+  padding: 18px 35px;
+  font-size: 1.05rem;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--orange) 0%, #d45500 100%);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 6px 20px rgba(var(--orange-rgb), 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.scan-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.scan-button:hover::before {
+  left: 100%;
+}
+
+.scan-button:hover {
+  box-shadow: 0 8px 30px rgba(var(--orange-rgb), 0.6);
+}
+
+.scan-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button-text {
+  position: relative;
+  z-index: 1;
+}
+
+.skull-icon {
+  font-size: 1.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.options {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.option-label:hover {
+  color: var(--orange);
+  transform: translateX(5px);
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: var(--orange);
+}
+
+/* Scanning State */
+.scanning-card {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.ghost-animation {
+  font-size: 5rem;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+}
+
+.scanning-message {
+  font-size: 1.4rem;
+  color: var(--orange);
+  margin-bottom: 35px;
+  text-shadow: 0 0 15px rgba(var(--orange-rgb), 0.6);
+  font-weight: 500;
+  min-height: 35px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 35px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 17px;
+  overflow: hidden;
+  border: 2px solid var(--dark-blue);
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange) 0%, #ff8c00 50%, var(--orange) 100%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 20px rgba(var(--orange-rgb), 0.8);
+  animation: shimmer 2s linear infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: slide 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.links-count {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 30px;
+}
+
+.count-number {
+  color: var(--orange);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.scanning-effects {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 2.5rem;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .scanner-card,
+  .scanning-card {
+    padding: 30px 20px;
+  }
+  
+  .input-group {
+    flex-direction: column;
+  }
+  
+  .scan-button {
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .options {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .ghost-animation {
+    font-size: 4rem;
+  }
+}

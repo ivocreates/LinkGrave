@@ -1,0 +1,29 @@
+.cursor-trail-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+.cursor-trail {
+  position: absolute;
+  font-size: 1.2rem;
+  pointer-events: none;
+  animation: trailFade 1s ease-out forwards;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes trailFade {
+  0% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3) translateY(-30px);
+  }
+}
