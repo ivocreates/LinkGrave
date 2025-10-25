@@ -44,6 +44,10 @@
   border-color: #9C27B0;
 }
 
+.summary-card.pages {
+  border-color: #2196F3;
+}
+
 .card-icon {
   font-size: 3rem;
 }

@@ -15,13 +15,10 @@ const spookyMessages = [
   "Chasing phantom pages... 👻"
 ];
 
-function Scanner({ onScan, isScanning }) {
+function Scanner({ onScan, isScanning, scanProgress, liveResults }) {
   const [url, setUrl] = useState('');
   const [deepScan, setDeepScan] = useState(false);
   const [checkExternal, setCheckExternal] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [message, setMessage] = useState('');
-  const [linksChecked, setLinksChecked] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,22 +26,6 @@ function Scanner({ onScan, isScanning }) {
 
     const normalizedUrl = url.startsWith('http') ? url : `https://${url}`;
     onScan(normalizedUrl, { deepScan, checkExternal });
-
-    // Simulate progress
-    let count = 0;
-    const interval = setInterval(() => {
-      if (count >= 100) {
-        clearInterval(interval);
-        return;
-      }
-      count += Math.random() * 10;
-      setProgress(Math.min(count, 100));
-      setLinksChecked(Math.floor(count / 2));
-      
-      if (count % 15 === 0) {
-        setMessage(spookyMessages[Math.floor(Math.random() * spookyMessages.length)]);
-      }
-    }, 500);
   };
 
   return (
@@ -131,25 +112,61 @@ function Scanner({ onScan, isScanning }) {
 
           <motion.p 
             className="scanning-message"
-            key={message}
+            key={scanProgress?.message}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            {message}
+            {scanProgress?.message || 'Awakening the spirits...'}
           </motion.p>
 
           <div className="progress-bar">
             <motion.div 
               className="progress-fill"
               initial={{ width: 0 }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.5 }}
+              animate={{ width: `${scanProgress?.progress || 0}%` }}
+              transition={{ duration: 0.3 }}
             />
           </div>
 
-          <p className="links-count">
-            Links checked: <span className="count-number">{linksChecked}</span>
-          </p>
+          {scanProgress?.stage === 'extracting' && (
+            <p className="links-count">
+              Pages scanned: <span className="count-number">{scanProgress.currentPage ? '...' : '0'}</span>
+            </p>
+          )}
+
+          {scanProgress?.stage === 'checking' && (
+            <p className="links-count">
+              Links checked: <span className="count-number">{scanProgress.checked || 0}</span> / {scanProgress.total || 0}
+            </p>
+          )}
+
+          {/* Live dead links feed */}
+          {liveResults && liveResults.length > 0 && (
+            <motion.div 
+              className="live-results"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              <h4 className="live-title">💀 Dead Links Found:</h4>
+              <div className="live-list">
+                {liveResults.slice(-5).map((result, index) => (
+                  <motion.div
+                    key={index}
+                    className="live-item"
+                    initial={{ x: -50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <span className="live-status">{result.statusCode || '❌'}</span>
+                    <span className="live-url">{result.url.substring(0, 50)}...</span>
+                  </motion.div>
+                ))}
+              </div>
+              {liveResults.length > 5 && (
+                <p className="live-more">and {liveResults.length - 5} more...</p>
+              )}
+            </motion.div>
+          )}
 
           <div className="scanning-effects">
             <motion.span

@@ -17,6 +17,8 @@ function App() {
   const [showSecret, setShowSecret] = useState(false);
   const [konami, setKonami] = useState([]);
   const [easterEggCount, setEasterEggCount] = useState(0);
+  const [scanProgress, setScanProgress] = useState(null);
+  const [liveResults, setLiveResults] = useState([]);
   const audioRef = useRef(null);
 
   // Konami code: up, up, down, down, left, right, left, right, b, a
@@ -59,11 +61,22 @@ function App() {
   const handleScan = async (url, options) => {
     setIsScanning(true);
     setResults(null);
+    setScanProgress(null);
+    setLiveResults([]);
     playSpookySound();
 
     try {
-      const scanResults = await scanWebsite(url, options);
+      const scanResults = await scanWebsite(url, options, (progress) => {
+        setScanProgress(progress);
+        
+        // Add live results as they come in
+        if (progress.result && progress.result.isDead) {
+          setLiveResults(prev => [...prev, progress.result]);
+        }
+      });
+      
       setResults(scanResults);
+      setScanProgress(null);
       
       // Chance of jump scare after scan
       if (scanResults.deadLinks.length > 10 && Math.random() < 0.5) {
@@ -114,7 +127,12 @@ function App() {
         <Header onEasterEgg={handleEasterEggClick} />
         
         {!results ? (
-          <Scanner onScan={handleScan} isScanning={isScanning} />
+          <Scanner 
+            onScan={handleScan} 
+            isScanning={isScanning}
+            scanProgress={scanProgress}
+            liveResults={liveResults}
+          />
         ) : (
           <Results results={results} onNewScan={() => setResults(null)} />
         )}

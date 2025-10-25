@@ -207,6 +207,64 @@
   margin-top: 20px;
 }
 
+/* Live Results Feed */
+.live-results {
+  margin-top: 30px;
+  background: rgba(var(--orange-rgb), 0.1);
+  border: 2px solid var(--orange);
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.live-title {
+  font-size: 1rem;
+  color: var(--orange);
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.live-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.live-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.live-status {
+  color: var(--orange);
+  font-weight: 700;
+  min-width: 40px;
+  text-align: center;
+}
+
+.live-url {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.live-more {
+  text-align: center;
+  margin-top: 10px;
+  color: var(--orange);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .scanner-card,
   .scanning-card {
@@ -229,5 +287,13 @@
   
   .ghost-animation {
     font-size: 4rem;
+  }
+  
+  .live-results {
+    max-height: 200px;
+  }
+  
+  .live-url {
+    font-size: 0.75rem;
   }
 }

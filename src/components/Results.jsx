@@ -98,6 +98,20 @@ function Results({ results, onNewScan }) {
             <div className="card-label">Total Links</div>
           </div>
         </motion.div>
+
+        <motion.div 
+          className="summary-card pages"
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          whileHover={{ scale: 1.05, rotate: -2 }}
+        >
+          <div className="card-icon">📄</div>
+          <div className="card-info">
+            <div className="card-number">{results.pagesScanned || 1}</div>
+            <div className="card-label">Pages Scanned</div>
+          </div>
+        </motion.div>
       </div>
 
       {results.deadLinks.length === 0 ? (
