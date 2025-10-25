@@ -130,6 +130,22 @@ function App() {
           <p className="secret-hint" onClick={handleEasterEggClick}>
             🕷️ {easterEggCount > 0 ? `${easterEggCount}/6` : 'Click the spider...'}
           </p>
+          <motion.div 
+            className="footer-links"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+          >
+            <a href="https://github.com/ivocreates/LinkGrave" target="_blank" rel="noopener noreferrer" className="footer-link">
+              <span className="link-icon">🪦</span>
+              <span className="link-text">source</span>
+            </a>
+            <span className="separator">•</span>
+            <a href="https://ivocreates.site" target="_blank" rel="noopener noreferrer" className="footer-link">
+              <span className="link-icon">👻</span>
+              <span className="link-text">portfolio</span>
+            </a>
+          </motion.div>
         </footer>
       </div>
     </div>
